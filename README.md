@@ -54,3 +54,9 @@ This is a testing approach which is very useful when refactoring legacy code. Be
 It's basically the same idea as "assertEquals(expected, actual)" in a unit test, except the text you are comparing is typically much longer, and the "expected" value is saved from actual output, rather than being defined in advance.
 
 Typically a piece of legacy code may not produce suitable textual output from the start, so you may need to modify it before you can write your first text-based approval test. This has already been setup and the initial "Golden Master" has been provided in `ApprovalTest.ThirtyDays.verified.txt`
+
+## Scope of work
+
+Scope of work has been identified and documented in Trello [here][Trello]. Individual units of work will be linked back to these tickets for documentation purposes. 
+
+[Trello]: https://trello.com/b/eRooNI6q/gilded-rose
