@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace GildedRoseKata
 {
@@ -52,19 +53,22 @@ namespace GildedRoseKata
             };
 
             var app = new GildedRose(items);
+            var output = new StringBuilder();
 
-            Console.WriteLine("OMGHAI!");
+            output.AppendLine("OMGHAI!");
             for (var i = 0; i <= numberOfDays; i++)
             {
-                Console.WriteLine($"-------- day {i} --------");
-                Console.WriteLine("name, sellIn, quality");
+                output.AppendLine($"-------- day {i} --------");
+                output.AppendLine("name, sellIn, quality");
                 foreach (var item in items)
                 {
-                    Console.WriteLine(item.Name + ", " + item.SellIn + ", " + item.Quality);
+                    output.AppendLine($"{item.Name}, {item.SellIn}, {item.Quality}");
                 }
-                Console.WriteLine("");
+                output.AppendLine();
                 app.UpdateQuality();
             }
+
+            Console.Write(output.ToString());
         }
     }
 }
