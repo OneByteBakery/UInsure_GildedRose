@@ -22,4 +22,10 @@
         <ProjectReference Include="..\GildedRose\GildedRose.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="ProgramTest.GivenAnArgumentOf30_WhenCallingMain_ThenOutputMatchesGoldenMaster.verified.txt">
+        <DependentUpon>ProgramTest.cs</DependentUpon>
+      </None>
+    </ItemGroup>
+
 </Project>

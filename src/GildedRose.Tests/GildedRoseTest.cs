@@ -1,8 +1,9 @@
-﻿using Xunit;
+﻿using GildedRoseKata;
+
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using GildedRoseKata;
+
+using Xunit;
 
 namespace GildedRoseTests
 {
