@@ -11,7 +11,7 @@ namespace GildedRoseTests
     public sealed class GildedRoseTest
     {
         [Fact]
-        public void GivenAnItem_WhenCallingUpdateQuality_ThenNameIsNotModified()
+        public void GivenAnItem_WhenCallingPerformEndOfDayUpdates_ThenNameIsNotModified()
         {
             // Given
             const string itemName = "foo";
@@ -19,7 +19,7 @@ namespace GildedRoseTests
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(itemName, item.Name);
@@ -28,70 +28,70 @@ namespace GildedRoseTests
         #region Standard Items
 
         [Fact]
-        public void GivenAStandardItemWithPositiveQualityAndSellIn_WhenCallingUpdateQuality_ThenQualityIsReducedBy1()
+        public void GivenAStandardItemWithPositiveQualityAndSellIn_WhenCallingPerformEndOfDayUpdates_ThenQualityIsReducedBy1()
         {
             // Given
             var item = new Item { Name = "foo", SellIn = 5, Quality = 10 };
             
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
             
             // Then
             Assert.Equal(9, item.Quality);
         }
 
         [Fact]
-        public void GivenAStandardItemWithPositiveQualityAndSellIn_WhenCallingUpdateQuality_ThenSellInIsReducedBy1()
+        public void GivenAStandardItemWithPositiveQualityAndSellIn_WhenCallingPerformEndOfDayUpdates_ThenSellInIsReducedBy1()
         {
             // Given
             var item = new Item { Name = "foo", SellIn = 5, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(4, item.SellIn);
         }
 
         [Fact]
-        public void GivenAStandardItemWithPositiveQualityAndZeroSellIn_WhenCallingUpdateQuality_ThenQualityIsReducedBy2()
+        public void GivenAStandardItemWithPositiveQualityAndZeroSellIn_WhenCallingPerformEndOfDayUpdates_ThenQualityIsReducedBy2()
         {
             // Given
             var item = new Item { Name = "foo", SellIn = 0, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(8, item.Quality);
         }
 
         [Fact]
-        public void GivenAStandardItemWithPositiveQualityAndZeroSellIn_WhenCallingUpdateQuality_ThenSellInIsReducedBy1()
+        public void GivenAStandardItemWithPositiveQualityAndZeroSellIn_WhenCallingPerformEndOfDayUpdates_ThenSellInIsReducedBy1()
         {
             // Given
             var item = new Item { Name = "foo", SellIn = 0, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(-1, item.SellIn);
         }
 
         [Fact]
-        public void GivenAStandardItemWithZeroQuality_WhenCallingUpdateQuality_ThenQualityIsNotModified()
+        public void GivenAStandardItemWithZeroQuality_WhenCallingPerformEndOfDayUpdates_ThenQualityIsNotModified()
         {
             // Given
             var item = new Item { Name = "foo", SellIn = 5, Quality = 0 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(0, item.Quality);
@@ -102,70 +102,70 @@ namespace GildedRoseTests
         #region Aged Brie
 
         [Fact]
-        public void GivenAgedBrieWithPositiveQualityAndSellIn_WhenCallingUpdateQuality_ThenQualityIsIncreasedBy1()
+        public void GivenAgedBrieWithPositiveQualityAndSellIn_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy1()
         {
             // Given
             var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(11, item.Quality);
         }
 
         [Fact]
-        public void GivenAgedBrieWithPositiveQualityAndSellIn_WhenCallingUpdateQuality_ThenSellInIsReducedBy1()
+        public void GivenAgedBrieWithPositiveQualityAndSellIn_WhenCallingPerformEndOfDayUpdates_ThenSellInIsReducedBy1()
         {
             // Given
             var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(4, item.SellIn);
         }
 
         [Fact]
-        public void GivenAgedBrieWithPositiveQualityAndZeroSellIn_WhenCallingUpdateQuality_ThenQualityIsReducedBy2()
+        public void GivenAgedBrieWithPositiveQualityAndZeroSellIn_WhenCallingPerformEndOfDayUpdates_ThenQualityIsReducedBy2()
         {
             // Given
             var item = new Item { Name = "Aged Brie", SellIn = 0, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(12, item.Quality);
         }
 
         [Fact]
-        public void GivenAgedBrieWithPositiveQualityAndZeroSellIn_WhenCallingUpdateQuality_ThenSellInIsReducedBy1()
+        public void GivenAgedBrieWithPositiveQualityAndZeroSellIn_WhenCallingPerformEndOfDayUpdates_ThenSellInIsReducedBy1()
         {
             // Given
             var item = new Item { Name = "Aged Brie", SellIn = 0, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(-1, item.SellIn);
         }
 
         [Fact]
-        public void GivenAgedBrieWith50Quality_WhenCallingUpdateQuality_ThenQualityIsNotModified()
+        public void GivenAgedBrieWith50Quality_WhenCallingPerformEndOfDayUpdates_ThenQualityIsNotModified()
         {
             // Given
             var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 50 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(50, item.Quality);
@@ -181,14 +181,14 @@ namespace GildedRoseTests
         [InlineData(3)]
         [InlineData(4)]
         [InlineData(5)]
-        public void GivenABackstagePassWithPositiveQualityAndSellInIsGreaterThan0AndLessThan6_WhenCallingUpdateQuality_ThenQualityIsIncreasedBy3(int sellIn)
+        public void GivenABackstagePassWithPositiveQualityAndSellInIsGreaterThan0AndLessThan6_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy3(int sellIn)
         {
             // Given
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(13, item.Quality);
@@ -200,28 +200,28 @@ namespace GildedRoseTests
         [InlineData(8)]
         [InlineData(9)]
         [InlineData(10)]
-        public void GivenABackstagePassWithPositiveQualityAndSellInIsGreaterThan5AndLessThan11_WhenCallingUpdateQuality_ThenQualityIsIncreasedBy2(int sellIn)
+        public void GivenABackstagePassWithPositiveQualityAndSellInIsGreaterThan5AndLessThan11_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy2(int sellIn)
         {
             // Given
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(12, item.Quality);
         }
 
         [Fact]
-        public void GivenABackstagePassWithPositiveQualityAndSellInIsGreaterThan10_WhenCallingUpdateQuality_ThenQualityIsIncreasedBy1()
+        public void GivenABackstagePassWithPositiveQualityAndSellInIsGreaterThan10_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy1()
         {
             // Given
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 11, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(11, item.Quality);
@@ -230,14 +230,14 @@ namespace GildedRoseTests
         [Theory]
         [InlineData(0)]
         [InlineData(-1)]
-        public void GivenABackstagePassWithPositiveQualityAndSellInIsNotPositive_WhenCallingUpdateQuality_ThenQualityIsSetTo0(int sellIn)
+        public void GivenABackstagePassWithPositiveQualityAndSellInIsNotPositive_WhenCallingPerformEndOfDayUpdates_ThenQualityIsSetTo0(int sellIn)
         {
             // Given
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(0, item.Quality);
@@ -248,28 +248,28 @@ namespace GildedRoseTests
         #region Legendary Item
 
         [Fact]
-        public void GivenALegendaryItemWith80Quality_WhenCallingUpdateQuality_ThenQualityIsNotModified()
+        public void GivenALegendaryItemWith80Quality_WhenCallingPerformEndOfDayUpdates_ThenQualityIsNotModified()
         {
             // Given
             var item = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 5, Quality = 80 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(80, item.Quality);
         }
 
         [Fact]
-        public void GivenALegendaryItem_WhenCallingUpdateQuality_ThenSellInIsNotModified()
+        public void GivenALegendaryItem_WhenCallingPerformEndOfDayUpdates_ThenSellInIsNotModified()
         {
             // Given
             var item = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 5, Quality = 80 };
 
             // When
             var classUnderTest = new GildedRose(new List<Item> { item });
-            classUnderTest.UpdateQuality();
+            classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(80, item.Quality);

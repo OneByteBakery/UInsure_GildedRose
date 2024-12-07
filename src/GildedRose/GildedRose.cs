@@ -2,7 +2,7 @@
 
 namespace GildedRoseKata
 {
-    public sealed class GildedRose
+    internal sealed class GildedRose
     {
         private const string SulfurasName = "Sulfuras, Hand of Ragnaros";
         private const string BackstagePassName = "Backstage passes to a TAFKAL80ETC concert";
@@ -15,11 +15,70 @@ namespace GildedRoseKata
             Items = items;
         }
 
-        public void UpdateQuality()
+        public void PerformEndOfDayUpdates()
         {
             foreach (var item in Items)
             {
-                if (!IsAgedBrie(item) && !IsBackstagePass(item))
+                AdvanceSellIn(item);
+                UpdateQuality(item);
+            }
+        }
+
+        private static void UpdateQuality(Item item)
+        {
+            if (IsAgedBrie(item) || IsBackstagePass(item))
+            {
+                if (item.Quality < 50)
+                {
+                    item.Quality += 1;
+
+                    if (IsBackstagePass(item))
+                    {
+                        if (item.SellIn < 10)
+                        {
+                            if (item.Quality < 50)
+                            {
+                                item.Quality += 1;
+                            }
+                        }
+
+                        if (item.SellIn < 5)
+                        {
+                            if (item.Quality < 50)
+                            {
+                                item.Quality += 1;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (item.Quality > 0)
+                {
+                    if (!IsSulfuras(item))
+                    {
+                        item.Quality -= 1;
+                    }
+                }
+            }
+
+            if (item.SellIn >= 0) return;
+
+            if (IsAgedBrie(item))
+            {
+                if (item.Quality < 50)
+                {
+                    item.Quality += 1;
+                }
+            }
+            else
+            {
+                if (IsBackstagePass(item))
+                {
+                    item.Quality = 0;
+                }
+                else
                 {
                     if (item.Quality > 0)
                     {
@@ -29,65 +88,14 @@ namespace GildedRoseKata
                         }
                     }
                 }
-                else
-                {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality += 1;
+            }
+        }
 
-                        if (IsBackstagePass(item))
-                        {
-                            if (item.SellIn < 11)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    item.Quality += 1;
-                                }
-                            }
-
-                            if (item.SellIn < 6)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    item.Quality += 1;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (!IsSulfuras(item))
-                {
-                    item.SellIn -= 1;
-                }
-
-                if (item.SellIn < 0)
-                {
-                    if (!IsAgedBrie(item))
-                    {
-                        if (!IsBackstagePass(item))
-                        {
-                            if (item.Quality > 0)
-                            {
-                                if (!IsSulfuras(item))
-                                {
-                                    item.Quality -= 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            item.Quality = 0;
-                        }
-                    }
-                    else
-                    {
-                        if (item.Quality < 50)
-                        {
-                            item.Quality += 1;
-                        }
-                    }
-                }
+        private static void AdvanceSellIn(Item item)
+        {
+            if (!IsSulfuras(item))
+            {
+                item.SellIn -= 1;
             }
         }
 

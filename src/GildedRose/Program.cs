@@ -65,7 +65,7 @@ namespace GildedRoseKata
                     output.AppendLine($"{item.Name}, {item.SellIn}, {item.Quality}");
                 }
                 output.AppendLine();
-                app.UpdateQuality();
+                app.PerformEndOfDayUpdates();
             }
 
             Console.Write(output.ToString());
