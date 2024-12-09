@@ -10,7 +10,7 @@ using VerifyXunit;
 
 using Xunit;
 
-namespace GildedRoseTests
+namespace GildedRose.Tests
 {
     /// <summary>
     /// Runs the GildedRose program and ensures that the output matches the golden master

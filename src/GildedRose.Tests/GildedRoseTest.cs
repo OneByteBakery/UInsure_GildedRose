@@ -1,11 +1,10 @@
-﻿using GildedRoseKata;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-
+using GildedRose.Items;
+using GildedRoseKata;
 using Xunit;
 
-namespace GildedRoseTests
+namespace GildedRose.Tests
 {
     [ExcludeFromCodeCoverage]
     public sealed class GildedRoseTest
@@ -18,7 +17,7 @@ namespace GildedRoseTests
             var item = new Item { Name = itemName, SellIn = 0, Quality = 0 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -34,7 +33,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "foo", SellIn = 5, Quality = 10 };
             
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
             
             // Then
@@ -48,7 +47,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "foo", SellIn = 5, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -62,7 +61,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "foo", SellIn = 0, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -76,7 +75,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "foo", SellIn = 0, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -90,7 +89,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "foo", SellIn = 5, Quality = 0 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -108,7 +107,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -122,7 +121,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -136,7 +135,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "Aged Brie", SellIn = 0, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -150,7 +149,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "Aged Brie", SellIn = 0, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -164,7 +163,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 50 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -187,7 +186,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -206,7 +205,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -220,7 +219,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 11, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -236,7 +235,7 @@ namespace GildedRoseTests
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -251,10 +250,10 @@ namespace GildedRoseTests
         public void GivenALegendaryItemWith80Quality_WhenCallingPerformEndOfDayUpdates_ThenQualityIsNotModified()
         {
             // Given
-            var item = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 5, Quality = 80 };
+            var item = new LegendaryItem { Name = "Sulfuras, Hand of Ragnaros", SellIn = 5, Quality = 80 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
@@ -265,14 +264,42 @@ namespace GildedRoseTests
         public void GivenALegendaryItem_WhenCallingPerformEndOfDayUpdates_ThenSellInIsNotModified()
         {
             // Given
-            var item = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 5, Quality = 80 };
+            var item = new LegendaryItem { Name = "Sulfuras, Hand of Ragnaros", SellIn = 5, Quality = 80 };
 
             // When
-            var classUnderTest = new GildedRose(new List<Item> { item });
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
+            classUnderTest.PerformEndOfDayUpdates();
+
+            // Then
+            Assert.Equal(5, item.SellIn);
+        }
+
+        [Fact]
+        public void GivenALegendaryItemAndNameIsNotSulfuras_WhenCallingPerformEndOfDayUpdates_ThenQualityIsNotModified()
+        {
+            // Given
+            var item = new LegendaryItem { Name = "Andonisus, Reaper of Souls", SellIn = 5, Quality = 80 };
+
+            // When
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
             classUnderTest.PerformEndOfDayUpdates();
 
             // Then
             Assert.Equal(80, item.Quality);
+        }
+
+        [Fact]
+        public void GivenALegendaryItemAndNameIsNotSulfuras_WhenCallingPerformEndOfDayUpdates_ThenSellInIsNotModified()
+        {
+            // Given
+            var item = new LegendaryItem { Name = "Andonisus, Reaper of Souls", SellIn = 5, Quality = 80 };
+
+            // When
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
+            classUnderTest.PerformEndOfDayUpdates();
+
+            // Then
+            Assert.Equal(5, item.SellIn);
         }
 
         #endregion Legendary Item

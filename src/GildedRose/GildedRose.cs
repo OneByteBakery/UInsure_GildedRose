@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using GildedRose.Items;
 
 namespace GildedRoseKata
 {
@@ -17,7 +19,7 @@ namespace GildedRoseKata
 
         public void PerformEndOfDayUpdates()
         {
-            foreach (var item in Items)
+            foreach (var item in Items.Where(item => !IsLegendary(item)))
             {
                 AdvanceSellIn(item);
                 UpdateQuality(item);
@@ -56,10 +58,7 @@ namespace GildedRoseKata
             {
                 if (item.Quality > 0)
                 {
-                    if (!IsSulfuras(item))
-                    {
-                        item.Quality -= 1;
-                    }
+                    item.Quality -= 1;
                 }
             }
 
@@ -82,25 +81,16 @@ namespace GildedRoseKata
                 {
                     if (item.Quality > 0)
                     {
-                        if (!IsSulfuras(item))
-                        {
-                            item.Quality -= 1;
-                        }
+                        item.Quality -= 1;
                     }
                 }
             }
         }
 
-        private static void AdvanceSellIn(Item item)
-        {
-            if (!IsSulfuras(item))
-            {
-                item.SellIn -= 1;
-            }
-        }
+        private static void AdvanceSellIn(Item item) => item.SellIn -= 1;
 
         private static bool IsBackstagePass(Item item) => item.Name == BackstagePassName;
         private static bool IsAgedBrie(Item item) => item.Name == AgedBrieName;
-        private static bool IsSulfuras(Item item) => item.Name == SulfurasName;
+        private static bool IsLegendary(Item item) => item is LegendaryItem;
     }
 }
