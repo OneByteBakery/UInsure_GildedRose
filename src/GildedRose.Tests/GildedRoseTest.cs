@@ -182,7 +182,7 @@ namespace GildedRose.Tests
 
         #endregion Appreciating Item
 
-        #region Backstage Pass
+        #region Velben Item
 
         [Theory]
         [InlineData(1)]
@@ -190,10 +190,10 @@ namespace GildedRose.Tests
         [InlineData(3)]
         [InlineData(4)]
         [InlineData(5)]
-        public void GivenABackstagePassWithPositiveQualityAndSellInIsGreaterThan0AndLessThan6_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy3(int sellIn)
+        public void GivenAVelbenItemWithPositiveQualityAndSellInIsGreaterThan0AndLessThan6_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy3(int sellIn)
         {
             // Given
-            var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
+            var item = new VelbenItem { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
@@ -209,10 +209,10 @@ namespace GildedRose.Tests
         [InlineData(8)]
         [InlineData(9)]
         [InlineData(10)]
-        public void GivenABackstagePassWithPositiveQualityAndSellInIsGreaterThan5AndLessThan11_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy2(int sellIn)
+        public void GivenAVelbenItemWithPositiveQualityAndSellInIsGreaterThan5AndLessThan11_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy2(int sellIn)
         {
             // Given
-            var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
+            var item = new VelbenItem { Name = "Standard passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
@@ -223,10 +223,10 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void GivenABackstagePassWithPositiveQualityAndSellInIsGreaterThan10_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy1()
+        public void GivenAVelbenItemWithPositiveQualityAndSellInIsGreaterThan10_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy1()
         {
             // Given
-            var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 11, Quality = 10 };
+            var item = new VelbenItem { Name = "VIP passes to a TAFKAL80ETC concert", SellIn = 11, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
@@ -239,10 +239,10 @@ namespace GildedRose.Tests
         [Theory]
         [InlineData(0)]
         [InlineData(-1)]
-        public void GivenABackstagePassWithPositiveQualityAndSellInIsNotPositive_WhenCallingPerformEndOfDayUpdates_ThenQualityIsSetTo0(int sellIn)
+        public void GivenAVelbenItemWithPositiveQualityAndSellInIsNotPositive_WhenCallingPerformEndOfDayUpdates_ThenQualityIsSetTo0(int sellIn)
         {
             // Given
-            var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = 10 };
+            var item = new VelbenItem { Name = "Passes to a TAFKAL80ETC charity gig", SellIn = sellIn, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
@@ -252,7 +252,7 @@ namespace GildedRose.Tests
             Assert.Equal(0, item.Quality);
         }
 
-        #endregion Backstage Pass
+        #endregion Velben Item
 
         #region Legendary Item
 

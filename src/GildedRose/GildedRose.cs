@@ -6,10 +6,6 @@ namespace GildedRoseKata
 {
     internal sealed class GildedRose
     {
-        private const string SulfurasName = "Sulfuras, Hand of Ragnaros";
-        private const string BackstagePassName = "Backstage passes to a TAFKAL80ETC concert";
-        private const string AgedBrieName = "Aged Brie";
-
         IList<Item> Items;
 
         public GildedRose(IList<Item> items)
@@ -28,13 +24,13 @@ namespace GildedRoseKata
 
         private static void UpdateQuality(Item item)
         {
-            if (IsAppreciatingItem(item) || IsBackstagePass(item))
+            if (IsAppreciatingItem(item) || IsVelbenItem(item))
             {
                 if (item.Quality < 50)
                 {
                     item.Quality += 1;
 
-                    if (IsBackstagePass(item))
+                    if (IsVelbenItem(item))
                     {
                         if (item.SellIn < 10)
                         {
@@ -73,7 +69,7 @@ namespace GildedRoseKata
             }
             else
             {
-                if (IsBackstagePass(item))
+                if (IsVelbenItem(item))
                 {
                     item.Quality = 0;
                 }
@@ -89,7 +85,7 @@ namespace GildedRoseKata
 
         private static void AdvanceSellIn(Item item) => item.SellIn -= 1;
 
-        private static bool IsBackstagePass(Item item) => item.Name == BackstagePassName;
+        private static bool IsVelbenItem(Item item) => item is VelbenItem;
         private static bool IsAppreciatingItem(Item item) => item is AppreciatingItem;
         private static bool IsLegendary(Item item) => item is LegendaryItem;
     }
