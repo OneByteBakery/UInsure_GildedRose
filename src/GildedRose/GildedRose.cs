@@ -28,7 +28,7 @@ namespace GildedRoseKata
 
         private static void UpdateQuality(Item item)
         {
-            if (IsAgedBrie(item) || IsBackstagePass(item))
+            if (IsAppreciatingItem(item) || IsBackstagePass(item))
             {
                 if (item.Quality < 50)
                 {
@@ -64,7 +64,7 @@ namespace GildedRoseKata
 
             if (item.SellIn >= 0) return;
 
-            if (IsAgedBrie(item))
+            if (IsAppreciatingItem(item))
             {
                 if (item.Quality < 50)
                 {
@@ -90,7 +90,7 @@ namespace GildedRoseKata
         private static void AdvanceSellIn(Item item) => item.SellIn -= 1;
 
         private static bool IsBackstagePass(Item item) => item.Name == BackstagePassName;
-        private static bool IsAgedBrie(Item item) => item.Name == AgedBrieName;
+        private static bool IsAppreciatingItem(Item item) => item is AppreciatingItem;
         private static bool IsLegendary(Item item) => item is LegendaryItem;
     }
 }

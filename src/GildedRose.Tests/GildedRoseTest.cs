@@ -98,13 +98,15 @@ namespace GildedRose.Tests
 
         #endregion Standard Items
 
-        #region Aged Brie
+        #region Appreciating Item
 
-        [Fact]
-        public void GivenAgedBrieWithPositiveQualityAndSellIn_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy1()
+        [Theory]
+        [InlineData("Aged Brie")]
+        [InlineData("Aged Camembert")]
+        public void GivenAnAppreciatingItemWithPositiveQualityAndSellIn_WhenCallingPerformEndOfDayUpdates_ThenQualityIsIncreasedBy1(string name)
         {
             // Given
-            var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 10 };
+            var item = new AppreciatingItem { Name = name, SellIn = 5, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
@@ -114,11 +116,13 @@ namespace GildedRose.Tests
             Assert.Equal(11, item.Quality);
         }
 
-        [Fact]
-        public void GivenAgedBrieWithPositiveQualityAndSellIn_WhenCallingPerformEndOfDayUpdates_ThenSellInIsReducedBy1()
+        [Theory]
+        [InlineData("Aged Brie")]
+        [InlineData("Aged Camembert")]
+        public void GivenAnAppreciatingItemWithPositiveQualityAndSellIn_WhenCallingPerformEndOfDayUpdates_ThenSellInIsReducedBy1(string name)
         {
             // Given
-            var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 10 };
+            var item = new AppreciatingItem { Name = name, SellIn = 5, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
@@ -128,11 +132,13 @@ namespace GildedRose.Tests
             Assert.Equal(4, item.SellIn);
         }
 
-        [Fact]
-        public void GivenAgedBrieWithPositiveQualityAndZeroSellIn_WhenCallingPerformEndOfDayUpdates_ThenQualityIsReducedBy2()
+        [Theory]
+        [InlineData("Aged Brie")]
+        [InlineData("Aged Camembert")]
+        public void GivenAnAppreciatingItemWithPositiveQualityAndZeroSellIn_WhenCallingPerformEndOfDayUpdates_ThenQualityIsReducedBy2(string name)
         {
             // Given
-            var item = new Item { Name = "Aged Brie", SellIn = 0, Quality = 10 };
+            var item = new AppreciatingItem { Name = name, SellIn = 0, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
@@ -142,11 +148,13 @@ namespace GildedRose.Tests
             Assert.Equal(12, item.Quality);
         }
 
-        [Fact]
-        public void GivenAgedBrieWithPositiveQualityAndZeroSellIn_WhenCallingPerformEndOfDayUpdates_ThenSellInIsReducedBy1()
+        [Theory]
+        [InlineData("Aged Brie")]
+        [InlineData("Aged Camembert")]
+        public void GivenAnAppreciatingItemWithPositiveQualityAndZeroSellIn_WhenCallingPerformEndOfDayUpdates_ThenSellInIsReducedBy1(string name)
         {
             // Given
-            var item = new Item { Name = "Aged Brie", SellIn = 0, Quality = 10 };
+            var item = new AppreciatingItem { Name = name, SellIn = 0, Quality = 10 };
 
             // When
             var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
@@ -156,11 +164,13 @@ namespace GildedRose.Tests
             Assert.Equal(-1, item.SellIn);
         }
 
-        [Fact]
-        public void GivenAgedBrieWith50Quality_WhenCallingPerformEndOfDayUpdates_ThenQualityIsNotModified()
+        [Theory]
+        [InlineData("Aged Brie")]
+        [InlineData("Aged Camembert")]
+        public void GivenAnAppreciatingItemWith50Quality_WhenCallingPerformEndOfDayUpdates_ThenQualityIsNotModified(string name)
         {
             // Given
-            var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 50 };
+            var item = new AppreciatingItem { Name = name, SellIn = 5, Quality = 50 };
 
             // When
             var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
@@ -170,7 +180,7 @@ namespace GildedRose.Tests
             Assert.Equal(50, item.Quality);
         }
 
-        #endregion Aged Brie
+        #endregion Appreciating Item
 
         #region Backstage Pass
 
