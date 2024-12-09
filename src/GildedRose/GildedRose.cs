@@ -15,7 +15,7 @@ namespace GildedRoseKata
 
         public void PerformEndOfDayUpdates()
         {
-            foreach (var item in Items.Where(item => !IsLegendary(item)))
+            foreach (var item in Items.Where(item => item is not LegendaryItem))
             {
                 AdvanceSellIn(item);
                 UpdateQuality(item);
@@ -24,78 +24,69 @@ namespace GildedRoseKata
 
         private static void UpdateQuality(Item item)
         {
-            if (IsConjuredItem(item))
+            switch (item)
             {
-                DecreaseQuality(item);
-            }
-            
-            if (IsAppreciatingItem(item) || IsVelbenItem(item))
-            {
-                IncreaseQuality(item);
-
-                if (IsVelbenItem(item))
-                {
-                    if (item.SellIn < 10)
-                    {
-                        IncreaseQuality(item);
-                    }
-
-                    if (item.SellIn < 5)
-                    {
-                        IncreaseQuality(item);
-                    }
-                }
-            }
-            else
-            {
-                DecreaseQuality(item);
-            }
-
-            if (item.SellIn >= 0) return;
-
-            if (IsConjuredItem(item))
-            {
-                DecreaseQuality(item);
-            }
-
-            if (IsAppreciatingItem(item))
-            {
-                IncreaseQuality(item);
-            }
-            else
-            {
-                if (IsVelbenItem(item))
-                {
-                    item.Quality = 0;
-                }
-                else
-                {
-                    DecreaseQuality(item);
-                }
+                case ConjuredItem conjuredItem:
+                    UpdateConjuredItemQuality(conjuredItem);
+                    break;
+                case AppreciatingItem appreciatingItem:
+                    UpdateAppreciatingItemQuality(appreciatingItem);
+                    break;
+                case VelbenItem velbenItem:
+                    UpdateVelbenItemQuality(velbenItem);
+                    break;
+                default:
+                    UpdateStandardItemQuality(item);
+                    break;
             }
         }
 
-        private static void IncreaseQuality(Item item)
+        private static void UpdateConjuredItemQuality(ConjuredItem conjuredItem) =>
+            conjuredItem.Quality = conjuredItem switch
+            {
+                { SellIn: >= 0 } => AddQuality(conjuredItem, -2),
+                _ => AddQuality(conjuredItem, -4),
+            };
+
+        private static void UpdateAppreciatingItemQuality(AppreciatingItem appreciatingItem) =>
+            appreciatingItem.Quality = appreciatingItem switch
+            {
+                { SellIn: >= 0 } => AddQuality(appreciatingItem, +1),
+                _ => AddQuality(appreciatingItem, +2),
+            };
+
+        private static void UpdateVelbenItemQuality(VelbenItem velbenItem) =>
+            velbenItem.Quality = velbenItem switch
+            {
+                { SellIn: < 0 } => 0,
+                { SellIn: < 5 } => AddQuality(velbenItem, +3),
+                { SellIn: < 10 } => AddQuality(velbenItem, +2),
+                _ => AddQuality(velbenItem, +1),
+            };
+
+        private static void UpdateStandardItemQuality(Item item) =>
+            item.Quality = item switch
+            {
+                { SellIn: < 0 } => AddQuality(item, -2),
+                _ => AddQuality(item, -1),
+            };
+
+        private static int AddQuality(Item item, int adjustment)
         {
-            if (item.Quality < 50)
+            var result = item.Quality + adjustment;
+            if (result < 0)
             {
-                item.Quality += 1;
+                result = 0;
             }
+
+            if (result > 50)
+            {
+                result = 50;
+            }
+
+            return result;
         }
 
-        private static void DecreaseQuality(Item item)
-        {
-            if (item.Quality > 0)
-            {
-                item.Quality -= 1;
-            }
-        }
-
-        private static void AdvanceSellIn(Item item) => item.SellIn -= 1;
-
-        private static bool IsVelbenItem(Item item) => item is VelbenItem;
-        private static bool IsAppreciatingItem(Item item) => item is AppreciatingItem;
-        private static bool IsLegendary(Item item) => item is LegendaryItem;
-        private static bool IsConjuredItem(Item item) => item is ConjuredItem;
+        private static void AdvanceSellIn(Item item) => item.SellIn--;
     }
 }
