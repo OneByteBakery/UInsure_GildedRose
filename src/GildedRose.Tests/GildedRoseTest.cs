@@ -313,5 +313,82 @@ namespace GildedRose.Tests
         }
 
         #endregion Legendary Item
+
+        #region Conjured Items
+
+        [Fact]
+        public void GivenAConjuredItemWithPositiveQualityAndSellIn_WhenCallingPerformEndOfDayUpdates_ThenQualityIsReducedBy2()
+        {
+            // Given
+            var item = new ConjuredItem { Name = "foo", SellIn = 5, Quality = 10 };
+
+            // When
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
+            classUnderTest.PerformEndOfDayUpdates();
+
+            // Then
+            Assert.Equal(8, item.Quality);
+        }
+
+        [Fact]
+        public void GivenAConjuredItemWithPositiveQualityAndSellIn_WhenCallingPerformEndOfDayUpdates_ThenSellInIsReducedBy1()
+        {
+            // Given
+            var item = new ConjuredItem { Name = "foo", SellIn = 5, Quality = 10 };
+
+            // When
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
+            classUnderTest.PerformEndOfDayUpdates();
+
+            // Then
+            Assert.Equal(4, item.SellIn);
+        }
+
+        [Fact]
+        public void GivenAConjuredItemWithPositiveQualityAndZeroSellIn_WhenCallingPerformEndOfDayUpdates_ThenQualityIsReducedBy4()
+        {
+            // Given
+            var item = new ConjuredItem { Name = "foo", SellIn = 0, Quality = 10 };
+
+            // When
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
+            classUnderTest.PerformEndOfDayUpdates();
+
+            // Then
+            Assert.Equal(6, item.Quality);
+        }
+
+        [Fact]
+        public void GivenAConjuredItemWithPositiveQualityAndZeroSellIn_WhenCallingPerformEndOfDayUpdates_ThenSellInIsReducedBy1()
+        {
+            // Given
+            var item = new ConjuredItem { Name = "foo", SellIn = 0, Quality = 10 };
+
+            // When
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
+            classUnderTest.PerformEndOfDayUpdates();
+
+            // Then
+            Assert.Equal(-1, item.SellIn);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        public void GivenAConjuredItemWithQualityLessThan2_WhenCallingPerformEndOfDayUpdates_ThenQualityIsModifiedToZero(int quality)
+        {
+            // Given
+            var item = new ConjuredItem { Name = "foo", SellIn = 5, Quality = quality };
+
+            // When
+            var classUnderTest = new GildedRoseKata.GildedRose(new List<Item> { item });
+            classUnderTest.PerformEndOfDayUpdates();
+
+            // Then
+            Assert.Equal(0, item.Quality);
+        }
+
+        #endregion Conjured Items
+
     }
 }
