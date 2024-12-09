@@ -8,6 +8,11 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="GildedRose.Tests" />
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Autofac" Version="8.1.1" />
 	</ItemGroup>
 
 </Project>

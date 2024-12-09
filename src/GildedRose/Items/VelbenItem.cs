@@ -2,7 +2,7 @@
 
 namespace GildedRose.Items
 {
-    internal sealed class VelbenItem : Item
+    public sealed class VelbenItem : Item
     {
     }
 }

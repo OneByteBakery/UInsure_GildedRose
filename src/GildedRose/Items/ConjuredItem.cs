@@ -2,7 +2,7 @@
 
 namespace GildedRose.Items
 {
-    internal sealed class ConjuredItem : Item
+    public sealed class ConjuredItem : Item
     {
     }
 }

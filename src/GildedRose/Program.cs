@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+
+using Autofac;
+
+using GildedRose.Autofac;
 using GildedRose.Items;
 
 namespace GildedRoseKata
@@ -25,7 +29,7 @@ namespace GildedRoseKata
                 throw new ArgumentException("Supplied argument must be a positive integer");
             }
             
-            var items = new List<Item>{
+            IList<Item> items = new List<Item>{
                 new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
                 new AppreciatingItem {Name = "Aged Brie", SellIn = 2, Quality = 0},
                 new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
@@ -49,13 +53,13 @@ namespace GildedRoseKata
                     SellIn = 5,
                     Quality = 49
                 },
-				// this conjured item does not work properly yet
 				new ConjuredItem {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
             };
 
-            var app = new GildedRose(items);
-            var output = new StringBuilder();
+            var container = BuildContainer();
+            var app = container.Resolve<GildedRose>(TypedParameter.From(items));
 
+            var output = new StringBuilder();
             output.AppendLine("OMGHAI!");
             for (var i = 0; i <= numberOfDays; i++)
             {
@@ -70,6 +74,13 @@ namespace GildedRoseKata
             }
 
             Console.Write(output.ToString());
+        }
+
+        private static IContainer BuildContainer()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<GildedRoseModule>();
+            return builder.Build();
         }
     }
 }

@@ -1,15 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GildedRose;
 using GildedRose.Items;
+using GildedRose.QualityCalculators;
 
 namespace GildedRoseKata
 {
-    internal sealed class GildedRose
+    internal sealed class GildedRose 
     {
+        private readonly IQualityCalculator<Item> _standardQualityCalculator;
+        private readonly IQualityCalculator<AppreciatingItem> _appreciatingQualityCalculator;
+        private readonly IQualityCalculator<VelbenItem> _velbenQualityCalculator;
+        private readonly IQualityCalculator<ConjuredItem> _conjuredQualityCalculator;
+        
         IList<Item> Items;
 
-        public GildedRose(IList<Item> items)
+        public GildedRose(IQualityCalculator<Item> standardQualityCalculator,
+            IQualityCalculator<AppreciatingItem> appreciatingQualityCalculator,
+            IQualityCalculator<VelbenItem> velbenQualityCalculator,
+            IQualityCalculator<ConjuredItem> conjuredQualityCalculator,
+            IList<Item> items)
         {
+            _standardQualityCalculator = standardQualityCalculator;
+            _appreciatingQualityCalculator = appreciatingQualityCalculator;
+            _velbenQualityCalculator = velbenQualityCalculator;
+            _conjuredQualityCalculator = conjuredQualityCalculator;
             Items = items;
         }
 
@@ -22,71 +37,17 @@ namespace GildedRoseKata
             }
         }
 
-        private static void UpdateQuality(Item item)
+        private void UpdateQuality(Item item)
         {
-            switch (item)
-            {
-                case ConjuredItem conjuredItem:
-                    UpdateConjuredItemQuality(conjuredItem);
-                    break;
-                case AppreciatingItem appreciatingItem:
-                    UpdateAppreciatingItemQuality(appreciatingItem);
-                    break;
-                case VelbenItem velbenItem:
-                    UpdateVelbenItemQuality(velbenItem);
-                    break;
-                default:
-                    UpdateStandardItemQuality(item);
-                    break;
-            }
-        }
-
-        private static void UpdateConjuredItemQuality(ConjuredItem conjuredItem) =>
-            conjuredItem.Quality = conjuredItem switch
-            {
-                { SellIn: >= 0 } => AddQuality(conjuredItem, -2),
-                _ => AddQuality(conjuredItem, -4),
-            };
-
-        private static void UpdateAppreciatingItemQuality(AppreciatingItem appreciatingItem) =>
-            appreciatingItem.Quality = appreciatingItem switch
-            {
-                { SellIn: >= 0 } => AddQuality(appreciatingItem, +1),
-                _ => AddQuality(appreciatingItem, +2),
-            };
-
-        private static void UpdateVelbenItemQuality(VelbenItem velbenItem) =>
-            velbenItem.Quality = velbenItem switch
-            {
-                { SellIn: < 0 } => 0,
-                { SellIn: < 5 } => AddQuality(velbenItem, +3),
-                { SellIn: < 10 } => AddQuality(velbenItem, +2),
-                _ => AddQuality(velbenItem, +1),
-            };
-
-        private static void UpdateStandardItemQuality(Item item) =>
             item.Quality = item switch
             {
-                { SellIn: < 0 } => AddQuality(item, -2),
-                _ => AddQuality(item, -1),
+                ConjuredItem conjuredItem => _conjuredQualityCalculator.CalculateItemQuality(conjuredItem),
+                AppreciatingItem appreciatingItem => _appreciatingQualityCalculator.CalculateItemQuality(appreciatingItem),
+                VelbenItem velbenItem => _velbenQualityCalculator.CalculateItemQuality(velbenItem),
+                _ => _standardQualityCalculator.CalculateItemQuality(item)
             };
-
-        private static int AddQuality(Item item, int adjustment)
-        {
-            var result = item.Quality + adjustment;
-            if (result < 0)
-            {
-                result = 0;
-            }
-
-            if (result > 50)
-            {
-                result = 50;
-            }
-
-            return result;
         }
-
+        
         private static void AdvanceSellIn(Item item) => item.SellIn--;
     }
 }

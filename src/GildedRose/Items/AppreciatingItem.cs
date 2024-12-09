@@ -2,7 +2,7 @@
 
 namespace GildedRose.Items
 {
-    internal sealed class AppreciatingItem : Item
+    public sealed class AppreciatingItem : Item
     {
     }
 }
